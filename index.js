@@ -507,63 +507,33 @@ app.get('/get/weather/data', async (req, res) => {
 
 })
 
-app.get('/get/weather/data/old', async (req, res) => {
+app.get('/get/weather/data/static', async (req, res) => {
 
     try {
-        // get files list
-        setTimeout(async () => {
-            resetData()
-            await getFilesList()
-        }, 0);
-
-        // get file data
-        setTimeout(async () => {
-            console.log();
-
-            if (filesList.length > 0) {
-                await getFileData()
-            } else {
-                resetData()
-            }
-
-        }, 500);
-        setTimeout(() => {
-            console.log("FInal data in api", finalData);
-
-            if (finalData) {
-                res.json({
-                    "success": true,
-                    message: "Fetching the latest data",
-                    finalData
-                })
-            } else {
-                res.json({
-                    "success": false,
-                    message: "Unable to get the data"
-                })
-            }
-            // res.json({
-            //     "grs_data": [
-            //         {
-            //             "Date": "24_11_22",
-            //             "Time": "13:34:36",
-            //             "Temperature": [
-            //                 28.28,
-            //                 "C"
-            //             ],
-            //             "Pressure": [
-            //                 1007.5,
-            //                 "hpa"
-            //             ],
-            //             "Humidity": [
-            //                 76.79,
-            //                 "%RH"
-            //             ],
-            //             "GRS-id": 1
-            //         }
-            //     ]
-            // }) 
-        }, 1000);
+            res.json({
+                success: true,
+                message: "Fetching latest data",
+                data: {
+                "grs_data": [
+                    {
+                        "Date": "24_11_22",
+                        "Time": "13:34:36",
+                        "Temperature": [
+                            28.28,
+                            "C"
+                        ],
+                        "Pressure": [
+                            1007.5,
+                            "hpa"
+                        ],
+                        "Humidity": [
+                            76.79,
+                            "%RH"
+                        ],
+                        "GRS-id": 1
+                    }
+                ]
+            }}) 
 
     } catch (err) {
         console.log(err, " error in catch api");
